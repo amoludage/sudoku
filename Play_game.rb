@@ -26,9 +26,3 @@ hash = Hash.new
 sudoku = Sudoku.new(array, hash)
 user = User.new(sudoku)
 user.take_user_input
-=begin loop  do
-  sudoku.show
-  user.user_input
-  quit = gets.chomp
-  break if quit.eql?("Q")|| quit.eql?("q")
-=end
