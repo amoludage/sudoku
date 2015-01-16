@@ -5,11 +5,15 @@ class Sudoku
   end
 
   def show
-    puts @array.map{|number| puts number.join(' ') }
+    @array.map{|number| puts number.join(' ') }
+    #puts @hash.map{|number| puts number.join(' ') }
   end
 
-  def check_is_modifiable(row, column)
+=begin  def check_is_modifiable(row, column)
     if @hash.has_key?("#{row}#{column}") ? true : false ; end
+=end
+  def check_is_modifiable(row, column)
+    if @hash[row][column] > 0 ? true : false ; end
   end
 
   def is_filled?
@@ -41,5 +45,29 @@ class Sudoku
   def insert_number(row, column, number)
     @array[row][column] = number
     return true
+  end
+
+=begin  def generate_flag
+    row = 0
+    9.times do
+      col = 0
+      9.times do
+        @hash["#{row}#{col}"] = 1 if (@array[row][col].between?(1,9))
+        col += 1
+      end
+      row += 1
+    end
+    return
+=end
+  def generate_flag
+    row = 0
+    9.times do
+      col = 0
+      9.times do
+        @hash[row][col] = 1 if @array[row][col] > 0
+        col += 1
+      end
+      row += 1
+    end
   end
 end
