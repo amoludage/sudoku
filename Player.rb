@@ -1,9 +1,10 @@
 require "./Exception"
 require "./Sudoku"
 
-class User
-  def initialize(sudoku)
+class Player
+  def initialize(sudoku, player_name)
     @sudoku = sudoku
+    @player_name = player_name
   end
 
   def take_user_input
@@ -17,17 +18,7 @@ class User
         puts "Enter the number you want to put at above position: "
         number = validate_number_input(gets.chomp.to_i)
 
-        if @sudoku.check_is_modifiable(row, column)
-          puts "Already their is number"
-          take_user_input
-        end
-        if @sudoku.validate_row(row-1, number) || @sudoku.validate_column(column-1, number) || @sudoku.validate_grid(row-1, column-1, number)
-          puts "Invalid number at this position.."
-          take_user_input
-        end
-        if @sudoku.insert_number(row-1, column-1, number)
-          take_user_input
-        end
+        check_positions(row, column, number)
 
       rescue InvalidRowError => e
         puts e.message
@@ -40,6 +31,7 @@ class User
         retry
       end
     end
+    puts "Congrats #{@player_name} you won the game"
   end
 
 
@@ -62,5 +54,22 @@ class User
       raise InvalidNumberError, "Invalid number.."
     end
     return number
+  end
+
+  def check_positions(row, column, number)
+    val_row = @sudoku.validate_row(row-1, number)
+    val_column =  @sudoku.validate_column(column-1, number)
+    val_grid = @sudoku.validate_grid(row-1, column-1, number)
+
+    if @sudoku.check_is_modifiable?(row - 1, column - 1)
+      puts "Already their is number"
+      take_user_input
+    elsif val_row || val_column || val_grid
+      puts "Invalid number at this position.."
+      take_user_input
+    else
+      @sudoku.insert_number(row - 1, column - 1, number)
+      take_user_input
+    end
   end
 end
