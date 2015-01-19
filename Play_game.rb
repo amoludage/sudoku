@@ -18,5 +18,3 @@ sudoku = Sudoku.new(array, hash)
 sudoku.generate_flag
 player = Player.new(sudoku, name)
 player.take_user_input
-
-#colj

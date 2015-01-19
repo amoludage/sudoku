@@ -52,12 +52,10 @@ class Sudoku
     9.times do
       col = 0
       9.times do
-        @hash["#{row}#{col}"] = 1 if (@array[row][col] > 0)
+        @hash[row][col] = 1 if @array[row][col] > 0
         col += 1
       end
       row += 1
     end
-    return
   end
-
 end
