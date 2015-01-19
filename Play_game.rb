@@ -11,7 +11,6 @@ array =[
     [0, 6, 9, 0, 8, 3, 2, 0, 0],[1, 0, 4, 5, 7, 6, 8, 0, 0],
     [5, 0, 0, 1, 9, 0, 4, 0, 2]]
 
-#hash = Array.new(9){Array.new(9,0)}
 hash = Hash.new
 puts "Enter your name :"
 name = gets.chomp

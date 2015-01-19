@@ -59,4 +59,5 @@ class Sudoku
     end
     return
   end
+
 end
